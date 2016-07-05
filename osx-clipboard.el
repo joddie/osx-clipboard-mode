@@ -67,7 +67,8 @@ It sets the variables `interprogram-cut-function' and
 Consider also customizing the variable
   `save-interprogram-paste-before-kill' to `t' for best results."
   :global t
-  :lighter " OSX-Clipboard" :tag "OS X Clipboard Mode"
+  :lighter osx-clipboard-lighter
+  :tag "OS X Clipboard Mode"
   :group 'osx-clipboard
   (if (not (and (eq system-type 'darwin) (not window-system)))
       (progn
@@ -81,6 +82,13 @@ Consider also customizing the variable
         ;; Turn off
         (setq interprogram-cut-function nil
               interprogram-paste-function nil))))
+
+(defcustom osx-clipboard-lighter
+  " OSX-Clipboard"
+  "Mode-line indicator for `osx-clipboard-mode'."
+  :type '(choice (const :tag "No lighter" "")
+                 (string " OSX-Clipboard"))
+  :group 'osx-clipboard)
 
 (defun osx-clipboard-cut-function (text &rest ignore)
   "Copy TEXT to the OS X clipboard using \"pbpaste\".
